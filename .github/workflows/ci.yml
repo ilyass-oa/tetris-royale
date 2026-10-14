@@ -1,0 +1,27 @@
+name: Build and regression tests
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  headless:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Install server dependencies
+        run: sudo apt-get update && sudo apt-get install -y libssl-dev
+      - run: cmake --preset sanitize
+      - run: cmake --build --preset sanitize -j 2
+      - run: ctest --preset sanitize
+  desktop:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Install graphics dependencies
+        run: sudo apt-get update && sudo apt-get install -y libssl-dev libfreetype-dev libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev xvfb xauth
+      - run: cmake --preset desktop
+      - run: cmake --build --preset desktop -j 2
+      - run: ctest --preset desktop
