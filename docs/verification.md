@@ -2,7 +2,7 @@
 
 Verified on 2026-10-14, on Linux with GCC 16.1.1, CMake 4.4.1, OpenSSL 3.6.3 and SFML 3.0.0.
 
-The distributed source snapshot was configured and built independently of the original checkout. SFML was downloaded from its official source. The included nlohmann/json fallback was used deliberately (`CMAKE_DISABLE_FIND_PACKAGE_nlohmann_json=ON`). No old SDK or compiled project binary was needed.
+The build used SFML from its official source and the included nlohmann/json fallback (`CMAKE_DISABLE_FIND_PACKAGE_nlohmann_json=ON`).
 
 ## Checks performed
 
@@ -12,8 +12,6 @@ The distributed source snapshot was configured and built independently of the or
 | ASan + UBSan headless build and CTest | 4/4 passed; no sanitizer errors reported | Game, transport, database, integration |
 | GUI with Xvfb | Passed | Menu, offline solo, Classic with nine real local clients, Duel, Royal, match exit and disconnected send |
 | Server CLI | Passed | Occupied TCP port reports a bind error; SIGTERM exits cleanly |
-| Source privacy inspection | Passed within the inspected files | No historical collaborator identifiers, personal paths, account databases, academic reports or old Git history in the exported project |
-| PNG metadata sanitation | Passed | Text and EXIF chunks removed; encoded image payloads preserved |
 
 The sanitizer run checks the server, transport and game model; it does not claim to sanitize SFML or the GUI. GUI screenshots were inspected separately. Generated accounts in all tests are synthetic and temporary.
 
@@ -30,7 +28,7 @@ The sanitizer run checks the server, transport and game model; it does not claim
 
 ## What is not established
 
-Passing these checks does not guarantee zero bugs. This is still an academic game maintained as a demonstrable project.
+These checks do not cover every possible failure.
 
 - Actual multi-computer Wi-Fi/LAN sessions and UDP discovery across different routers were not tested. Use an explicit IPv4 address first.
 - Ubuntu GitHub Actions is configured separately; local Linux results do not substitute for its remote results.

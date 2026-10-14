@@ -1,6 +1,6 @@
 # Tetris Royale
 
-A university team project in C++20, with an SFML interface, offline solo play and client–server multiplayer.
+A Tetris game in C++20, with an SFML interface, offline solo play and client–server multiplayer.
 
 ![Classic match with nine players](docs/screenshots/classic-nine-players.png)
 
@@ -63,5 +63,3 @@ ctest --preset desktop
 ```
 
 See [architecture](docs/architecture.md), [test results and limitations](docs/verification.md) and [third-party notices](THIRD_PARTY.md).
-
-Maintenance and regression tests used AI assistance.
